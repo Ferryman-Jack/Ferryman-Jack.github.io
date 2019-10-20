@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>使用github和hexo搭建博客(四)</title>
+    <url>/2019/10/20/%E4%BD%BF%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E5%9B%9B/</url>
+    <content><![CDATA[<p>这是第三篇介绍通过hexo博客框架和github搭建个人博客的分享，希望能对你有所帮助。本篇博客主要介绍编辑工具Sublime Text的安装和本地Hexo的编辑以及把本地博客文件部署到Github。</p>
+<hr>
+<h1 id="Sublime-Text的安装"><a href="#Sublime-Text的安装" class="headerlink" title="Sublime Text的安装"></a>Sublime Text的安装</h1><ul>
+<li><p>Sublime Text是什么：<br>  1、Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。<br>  2、Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。.<br>  3、Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统。<br>  4、我们主要使用Sublime Text编辑<font color="red">.md</font>文件和<font color="red">.yml</font>文件。</p>
+</li>
+<li><p>Sublime Text的官网</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ http://www.sublimetext.com/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接在官网下载。</p>
+</li>
+</ul>
+<hr>
+<h1 id="本地博客文章的建立与编辑"><a href="#本地博客文章的建立与编辑" class="headerlink" title="本地博客文章的建立与编辑"></a>本地博客文章的建立与编辑</h1><h2 id="文章的创建"><a href="#文章的创建" class="headerlink" title="文章的创建"></a>文章的创建</h2><ul>
+<li>在上一篇创建的文件夹中点击右键，打开Git Bash Here，然后使用下面的命令：</li>
+<li>创建博客的新文章，使用Sublime打开路径为<font color="red">\博客名\source_posts\文章名.md</font>进行编辑。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"文章名(自定义)"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h1 id="本地博客部署到Github"><a href="#本地博客部署到Github" class="headerlink" title="本地博客部署到Github"></a>本地博客部署到Github</h1><h2 id="配置-config-yml文件-下面只标注了需要修改的项目"><a href="#配置-config-yml文件-下面只标注了需要修改的项目" class="headerlink" title="配置_config.yml文件(下面只标注了需要修改的项目)"></a>配置_config.yml文件(下面只标注了需要修改的项目)</h2><ul>
+<li><p>站点配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: Jack  // 网站标题</span><br><span class="line">subtitle: Jack // 网站副标题</span><br><span class="line">description: Jack  // 网站描述</span><br><span class="line">author: Jack  // 您的名字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>URL配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line">url: http://blogwenbo.com/  // https://+仓库名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Git的部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line"><span class="built_in">type</span>: git // 类型</span><br><span class="line">repo: http://github.com/Ferryman-Jack/Ferryman-Jack.github.io.git // 仓库链接地址</span><br><span class="line">branch: master  // 分支</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="博客配置文件填写完毕，进行上传测试-按照下列命令进行"><a href="#博客配置文件填写完毕，进行上传测试-按照下列命令进行" class="headerlink" title="博客配置文件填写完毕，进行上传测试(按照下列命令进行)"></a>博客配置文件填写完毕，进行上传测试(按照下列命令进行)</h2><ul>
+<li><p>首先配置用户名及密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">"GitHub账号绑定的邮箱地址"</span></span><br><span class="line">git config --global user.name <span class="string">"GitHub账号名"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清空博客缓存</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成静态博客文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署博客到远端,如果出现保持请点击<a href="https://gclcode.github.io/2019/07/15/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BAHexo-deploy%E5%91%BD%E4%BB%A4%E6%8A%A5%E9%94%99/#more" target="_blank" rel="noopener">解决办法</a>进行查看,如果没有报错那就是成功了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>github与hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用github和hexo搭建博客(三)</title>
+    <url>/2019/10/20/%E4%BD%BF%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E4%B8%89/</url>
+    <content><![CDATA[<p>这是第三篇介绍通过hexo博客框架和github搭建个人博客的分享，希望能对你有所帮助。这篇博客主要介绍hexo在本地的安装。</p>
+<hr>
+<h1 id="Hexo本地安装"><a href="#Hexo本地安装" class="headerlink" title="Hexo本地安装"></a>Hexo本地安装</h1><h2 id="详细操作可以去Hexo查看"><a href="#详细操作可以去Hexo查看" class="headerlink" title="详细操作可以去Hexo查看"></a>详细操作可以去<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>查看</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://hexo.io/zh-cn/</span><br></pre></td></tr></table></figure>
+
+<h2 id="新建Blog-可自定义名-后，在文件夹中点击右键点击Git-Bash-Here后输入下面的命令："><a href="#新建Blog-可自定义名-后，在文件夹中点击右键点击Git-Bash-Here后输入下面的命令：" class="headerlink" title="新建Blog(可自定义名)后，在文件夹中点击右键点击Git Bash Here后输入下面的命令："></a>新建Blog(可自定义名)后，在文件夹中点击右键点击Git Bash Here后输入下面的命令：</h2><ul>
+<li><p>安装hexo框架</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化博客文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init <span class="string">"博客名(自定义)"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入初始化的博客文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="string">"博客名(你自定义的名)"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装博客依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在本地启动你的博客</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="由于Hexo启动是默认主题，本机4000端口的博客样式应该与下面的一样："><a href="#由于Hexo启动是默认主题，本机4000端口的博客样式应该与下面的一样：" class="headerlink" title="由于Hexo启动是默认主题，本机4000端口的博客样式应该与下面的一样："></a>由于Hexo启动是默认主题，本机4000端口的博客样式应该与下面的一样：</h2><p><img src="https://s2.ax1x.com/2019/10/20/KutPfK.png" alt="github3"></p>
+<ul>
+<li>至此hexo已经在本地安装完成了。你可以通过点击<a href="http://localhost:4000" target="_blank" rel="noopener">此处</a>查看。下面是本地博客地址：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ http://localhost:4000</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>现在建立的博客还只能自己本地查看，别人不能查看，如果想要别人查看，需要把本地的内容部署到远端，这个内容我们下期介绍。</li>
+<li>如果你对hexo的命令还不熟悉，你可以查看<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">Hexo</a>的官方文档</li>
+</ul>
+<hr>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>github与hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用github和hexo搭建博客(二)</title>
+    <url>/2019/10/16/%E4%BD%BF%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E4%BA%8C/</url>
+    <content><![CDATA[<p>这是第二篇使用hexo博客框架和Github搭建自己的博客的分享，希望对大家有所帮助。这篇博客主要介绍Github仓库的建立和SSH的配置。</p>
+<hr>
+<h1 id="Github仓库的建立"><a href="#Github仓库的建立" class="headerlink" title="Github仓库的建立"></a>Github仓库的建立</h1><h3 id="什么是Github的库？"><a href="#什么是Github的库？" class="headerlink" title="什么是Github的库？"></a>什么是Github的库？</h3><ul>
+<li>GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，故名GitHub</li>
+<li>GitHub for Windows 是一个 Metro 风格应用程序，集成了自包含版本的 Git，bash 命令行 shell，PowerShell 的 posh-git 扩展。GitHub 为 Windows 用户提供了一个基本的图形前端去处理大部分常用版本控制任务，可以创建版本库，向本地版本库递交补丁，在本地和远程版本库之间同步。微软也通过CodePlex向开发者提供 git 版本控制系统，而 GitHub 创造了一个更具有吸引力的 Windows 版本。</li>
+</ul>
+<h3 id="登录Github"><a href="#登录Github" class="headerlink" title="登录Github"></a>登录Github</h3>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://github.com/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>登录你已经注册并激活的账号，点击 <font color="red">Repositories</font>后在点击<font color="red">New</font>。<br><img src="https://s2.ax1x.com/2019/10/16/KkFgYj.png" alt="github2-1"><br><img src="https://s2.ax1x.com/2019/10/16/KkFflq.png" alt="github2-2"></li>
+<li>填写仓库信息: 为了方便以后的操作，仓库的链接格式可以按照图片中的格式写。另外仓库名必须与注册的用户名<font color="red">一致</font>，不然在本地提交的时候会<font color="red">报错</font>。<br><img src="https://s2.ax1x.com/2019/10/16/KkkVjP.png" alt="github2-3"></li>
+</ul>
+<hr>
+<h1 id="SSH的配置"><a href="#SSH的配置" class="headerlink" title="SSH的配置"></a>SSH的配置</h1><h2 id="为什么要配置SSH"><a href="#为什么要配置SSH" class="headerlink" title="为什么要配置SSH"></a>为什么要配置SSH</h2><ul>
+<li>Git使用https协议，每次pull, push都要输入密码，相当的烦。<br>使用git协议，然后使用ssh密钥。这样可以省去每次都输密码。</li>
+<li>公钥我们一般是给服务器的,他们到时候在权限中加入我给的公钥,然后当我从远地仓库中下载项目的时候,我在git clone xxx的时候，那个服务器我通过他的绑定的公钥来匹配我的私钥，这个时候,如果匹配,则就可以正常下载,如果不匹配,则失败.</li>
+<li>大多数 Git 服务器都会选择使用 SSH 公钥来进行授权。系统中的每个用户都必须提供一个公钥用于授权，没有的话就要生成一个。</li>
+</ul>
+<h2 id="配置-SSH-Keys"><a href="#配置-SSH-Keys" class="headerlink" title="配置 SSH Keys"></a><a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac" target="_blank" rel="noopener">配置 SSH Keys</a></h2><ul>
+<li><p>在任意位置点击鼠标右键，在弹出的窗口内点击<font color="red">Git Bash Here</font>，然后输入下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b 4096 -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会让你输入保存位置，不用管，直接使用默认位置就可以了</p>
+</li>
+</ul>
+<h2 id="检查SSH"><a href="#检查SSH" class="headerlink" title="检查SSH"></a>检查SSH</h2><ul>
+<li><p>进入到SSH目录，。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示文件夹内的文件，查看是否存在id_rsa.pub文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看并复制id_rsa.pub中key的信息，文本信息具体如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/10/16/KkZ3IU.png" alt="github2-4"></p>
+<ul>
+<li>1、然后依次打开<font color="red">Github网站</font> -&gt; <font color="red">Settings</font> -&gt; <font color="red">SSH And GPG Keys</font></li>
+<li>2、点击<font color="red">New SSH Key</font>按钮</li>
+<li>3、添加Title和Key<pre><code>tiile：随便输入即可，如果是我自己的电脑，则可以输入lidaze macbook
+Key: 粘贴即可</code></pre></li>
+<li>4、重新输入Github的密码即可</li>
+</ul>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>github与hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用github和hexo搭建博客(一)</title>
+    <url>/2019/10/14/%E4%BD%BF%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E4%B8%80/</url>
+    <content><![CDATA[<p>这是我第一次搭建博客，为了方便身旁的小伙伴能够想我一样搭建一个自己的博客，我决定把自己搭建博客的流程分享给大家。我这个博客是通过github和hexo框架共同搭建起来的，属于静态博客。本篇博客主要分享Node.js的下载及安装和github账号的注册以及Git For Windows的下载安装</p>
+<hr>
+<ul>
+<li><p>为什么要安装Node.js和Git For Windows:<br>  a 我们使用的博客框架是hexo，Hexo 是一个快速、简洁且高效的博客框架。<br>  b Hexo是由Node.js和Git For Windows支持的<br>  c hexo的具体安装你可以前往hexo的官网进行查看和了解</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://hexo.io/zh-cn/docs/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由于Git For Windows的下载非常慢，我这里提供两种下载方式，当然你也可以去<a href="https://git-scm.com/" target="_blank" rel="noopener">官网</a>下载，不过需要翻墙。<br>  1、百度网盘的链接（Node.js和Git For Windows的安装包）</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ 网盘链接：https://pan.baidu.com/s/1tm2IajXo-wLin0w4WetpTA  提取码：ooty</span><br></pre></td></tr></table></figure>
+
+<p>  2、你也可以参考这个<a href="https://github.com/waylau/git-for-win" target="_blank" rel="noopener">页面</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="Node-js的下载及安装"><a href="#Node-js的下载及安装" class="headerlink" title="Node.js的下载及安装"></a>Node.js的下载及安装</h1><h3 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h3><ul>
+<li>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。</li>
+<li>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型。</li>
+<li>Node 是一个让 JavaScript 运行在服务端的开发平台，它让 JavaScript 成为与PHP、Python、Perl、Ruby 等服务端语言平起平坐的脚本语言。</li>
+</ul>
+<h3 id="v10-16-3版本的Node-js的下载链接"><a href="#v10-16-3版本的Node-js的下载链接" class="headerlink" title="v10.16.3版本的Node.js的下载链接:"></a>v10.16.3版本的Node.js的下载链接:</h3>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://nodejs.org/dist/v10.16.3/node-v10.16.3-x64.msi</span><br></pre></td></tr></table></figure>
+
+<h3 id="Node-js的官方下载地址"><a href="#Node-js的官方下载地址" class="headerlink" title="Node.js的官方下载地址:"></a>Node.js的官方下载地址:</h3>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://nodejs.org/en/</span><br></pre></td></tr></table></figure>
+
+<h3 id="Node-js的下载"><a href="#Node-js的下载" class="headerlink" title="Node.js的下载"></a>Node.js的下载</h3><p><img src="https://s2.ax1x.com/2019/10/15/K9MufH.png" alt="Nodejs.png"></p>
+<h3 id="Node-js的安装及验证"><a href="#Node-js的安装及验证" class="headerlink" title="Node.js的安装及验证"></a>Node.js的安装及验证</h3><ul>
+<li>Node.js的安装和其他桌面应用程序一样，一直点下一步，直到安装完成。</li>
+<li>在cmd命令行窗口中，使用node -v命令进行查看安装的Node.js的版本，如果获得下面的输出，恭喜你，你已经成功的安装了Node.js<br><img src="https://s2.ax1x.com/2019/10/15/K9Qcrt.png" alt="nodev"></li>
+</ul>
+<hr>
+<h1 id="github账号的注册"><a href="#github账号的注册" class="headerlink" title="github账号的注册"></a>github账号的注册</h1><h3 id="github是什么"><a href="#github是什么" class="headerlink" title="github是什么:"></a>github是什么:</h3><ul>
+<li>要了解Github，我们首先要知道Git，Git是管理代码的工具，写代码不是件轻松的事儿，一个人写的时候已经不轻松了，一群人写就更不轻松了，但这世界上很多事都是怎么不轻松怎么来的，大部分人都会和别人一起写代码，问题在于，这么多人写一个东西，你今天写一点，我明天写一点，然后发现你写错了，又影响到了我前天写的，最后汇总的时候怎么查找错误？又在什么时候汇总？这些问题太多了。为了让写代码这件事儿美好一点，我们有了一种名叫代码管理的东西，Git正是其中之一，我使用过的还有SVN，但是今天我们只讲Git。</li>
+<li>Git的核心思想是『分布式』，我们在服务器上面有一个『主仓库』，这里放的是拿得出台面的代码，我们也可以在自己的电脑上创建分支，这些分支由『主仓库』克隆而来，然后我们就可以愉快的在自己的电脑上写代码了，写完代码可以同步在自己电脑的分支里面，当你觉得自己的代码拿得出台面，我们可以申请把自己的代码更新到『主仓库』里面，一旦通过这样的审核，我们就对『主仓库』做了某种贡献，世界各地的杰出程序员不断的为一个项目的『主仓库』做贡献，让这个项目变得越来越完善。</li>
+<li>Github是运用Git思想来工作的一个商业网站，所有开发者都可以在Github上面为自己的项目创建一个『主仓库』，好的项目就像狼群中的小鲜肉一样，大量的开发者会把这个主仓库中的代码克隆到自己的『分仓库』去，用更性感的话来说，就是『Fork』。</li>
+<li>Git的方式的确很优雅，但问题在于，会有人愿意把自己辛辛苦苦的代码拿出来公布，并且让人Fork么？<br>会，不仅会，而且很多，Github有超过140万用户，你可能会撇撇嘴说那个啥啥社交软件都有2000万用户，区区140万算个啥。可是这140万用户几乎涵盖了这个世界上最优秀的开发者，我相信，你那个有2000W用户的社交软件的工程师，肯定也是用Github的。任何项目，在Github上面获得fork或star，都意味着其它工程师对这个项目的认可，这比100个QQ空间的赞更有价值。</li>
+<li>为什么这些优秀的工程师会开源自己的项目？<br>因为开源是一种精神</li>
+</ul>
+<h3 id="github的官网"><a href="#github的官网" class="headerlink" title="github的官网"></a>github的官网</h3>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://github.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a>注册github</h3><ul>
+<li>按照图片上的提示填写用户名、密码和邮箱之后，点击<font color="red">Sign up for GitHub</font>完成注册的第一步。<br><img src="https://s2.ax1x.com/2019/10/15/K98GFK.png" alt="github1-1"></li>
+<li>完成图片验证后按照下边的图片选择免费版即可，点击Continue完成注册的第二步。<br><img src="https://s2.ax1x.com/2019/10/15/K9tIu4.png" alt="github1-2"></li>
+<li>下边的三个问题随便填写后点击Submit或者直接点击skip this step即可完成GitHub账号的注册<br><img src="https://s2.ax1x.com/2019/10/15/K9NkPP.png" alt="github1-3"></li>
+<li>完成注册后的用户界面如下图所示，这时候的账号还不能立即使用。还需要验证你的邮箱，打开邮箱点击GitHub放给我们的邮件中的链接即可验证邮箱。<br><img src="https://s2.ax1x.com/2019/10/15/K9NLZj.png" alt="github1-4"></li>
+</ul>
+<hr>
+<h1 id="Git-For-Windows的下载安装"><a href="#Git-For-Windows的下载安装" class="headerlink" title="Git For Windows的下载安装"></a>Git For Windows的下载安装</h1><h3 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h3><ul>
+<li>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</li>
+<li>就是一个帮我们管理文件版本的程序，专业名称叫：分布式版本控制系统。</li>
+<li>Git 与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。</li>
+</ul>
+<h3 id="Git的官网"><a href="#Git的官网" class="headerlink" title="Git的官网"></a>Git的官网</h3>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://git-scm.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="下载Git，点击红框即可下载"><a href="#下载Git，点击红框即可下载" class="headerlink" title="下载Git，点击红框即可下载"></a>下载Git，点击红框即可下载</h3><p><img src="https://s2.ax1x.com/2019/10/15/K9dNqg.png" alt="github1-5"></p>
+<h3 id="Git的安装及验证"><a href="#Git的安装及验证" class="headerlink" title="Git的安装及验证:"></a>Git的安装及验证:</h3><ul>
+<li>Git的安装和Node.js的安装差不多，一直点击下一步，直到安装完成。</li>
+<li>Git的验证和Node.js的验证方式和Node.js的方式差不多，都是在cmd命令行窗口进行的，输入git –version，如果你获得了如下输出，恭喜你，你成功了。<br><img src="https://s2.ax1x.com/2019/10/15/K90vxP.png" alt="github1-6"><blockquote>
+<p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote></li>
+</ul>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>github与hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>红尘客栈</title>
+    <url>/2019/08/15/hello-world/</url>
+    <content><![CDATA[<p>大家好，这是我第一次搭建博客，许多地方还不太熟悉，我希望通过写博客，总结自己所学，希望能给你提供帮助，通过这个平台与大家相互交流和共同进步，谢谢。</p>
+<p><img src="https://s2.ax1x.com/2019/10/20/KMci5T.jpg" alt="初次见面"></p>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>]]></content>
+      <categories>
+        <category>初次见面</category>
+      </categories>
+      <tags>
+        <tag>导航</tag>
+        <tag>分享</tag>
+      </tags>
+  </entry>
+</search>
