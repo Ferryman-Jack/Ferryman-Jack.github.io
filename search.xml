@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaWeb(一)</title>
+    <url>/2019/10/30/JavaWeb-%E4%B8%80/</url>
+    <content><![CDATA[<p>大家好，最近学习了JavaWeb相关课程，写一篇博客来与大家分享我的学习心得。<br>俗话说的好啊，”工欲善其事，必先利其器”，今天这篇文章主要介绍了各种工具的的安装及使用。希望能对你有所帮助。</p>
+<hr>
+<h1 id="tomcat的配置"><a href="#tomcat的配置" class="headerlink" title="tomcat的配置"></a>tomcat的配置</h1><h2 id="tomcat的介绍"><a href="#tomcat的介绍" class="headerlink" title="tomcat的介绍"></a>tomcat的介绍</h2><ul>
+<li>Tomcat是<font color="red">Apache</font> 软件基金会的Jakarta项目中的一个核心项目，由Apache、Sun 和其他一些公司及个人共同开发而成。由于有了Sun 的参与和支持，最新的Servlet 和JSP 规范总是能在Tomcat 中得到体现，Tomcat 5支持最新的Servlet 2.4 和JSP 2.0 规范。</li>
+<li>因为Tomcat <font color="red">技术先进、性能稳定，而且免费</font>，因而深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</li>
+<li>Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，属于<font color="red">轻量级</font>应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是<font color="red">独立运行</font>的，所以当你运行tomcat 时，它实际上作为一个与Apache独立的进程单独运行的。</li>
+</ul>
+<h2 id="tomcat的下载"><a href="#tomcat的下载" class="headerlink" title="tomcat的下载"></a>tomcat的下载</h2><ul>
+<li><p>1、你可以去官网下载，官网上有最新的，还有以前的发行版本，我用的是7.0版本的。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ http://tomcat.apache.org/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、当然我也可以把我的分享给你</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ 百度网盘链接：https://pan.baidu.com/s/187gmmNmJwnVy7ss4AcrKnQ  提取码：ebt5</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="tomcat主要目录的介绍"><a href="#tomcat主要目录的介绍" class="headerlink" title="tomcat主要目录的介绍"></a>tomcat主要目录的介绍</h2><p><img src="https://s2.ax1x.com/2019/10/30/K51QQU.png" alt="JavaWeb1_1"></p>
+<!--![JavaWeb1_1](/images/JavaWeb1_1.png)  -->
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><ul>
+<li>启动的前提<br>  配置<font color="red">JAVA_HOME</font>:<br>  进入到F:\apache-tomcat-7.0.52\bin&gt;startup.bat 才能执行命令</li>
+<li>找到bin文件下的startup.bat文件，双击就可以运行了，如果运行出错，有可能是你的端口号被占用，tomcat默认端口号是8080，如果被占用你可以修改conf文件夹下的server.xml，位置如下面所示：<pre><code>&lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot;
+       connectionTimeout=&quot;20000&quot;
+       redirectPort=&quot;8443&quot; /&gt;</code></pre></li>
+</ul>
+<hr>
+<h1 id="MyEclipse的安装及激活"><a href="#MyEclipse的安装及激活" class="headerlink" title="MyEclipse的安装及激活"></a>MyEclipse的安装及激活</h1><h2 id="MyEclipse的介绍"><a href="#MyEclipse的介绍" class="headerlink" title="MyEclipse的介绍"></a>MyEclipse的介绍</h2><ul>
+<li>1、广泛的技术积累：MyEclipse为团队在所有厂商的流行技术之间提供了很好的平衡。从Spring、REST 到Maven，在单一堆栈下统一开发，支持你所需要的一切。</li>
+<li>2、多种应用服务器上轻松测试：多种内置的服务器连接器用于监控你的应用运行。部署的应用服务器包括WebSphere、Glassfish、WebLogic和Tomcat等等。为了应对极速测试，提供了即时可用的集成化MyEclipse Tomcat和Derby服务器。</li>
+<li>3、可视化编辑器加速编码：编码的方式一定要最适合自己—资源或可视化编辑。可视化编辑能节省时间，但是代码助手资源始终让你得心应手。</li>
+<li>4、MyEclipse是用专门用来开发JavaWeb工程的，其功能比eclipse强大许多，它集成了JavaWeb开发所需的jar包，使用方便。</li>
+</ul>
+<h2 id="MyEclipse的下载"><a href="#MyEclipse的下载" class="headerlink" title="MyEclipse的下载"></a>MyEclipse的下载</h2><ul>
+<li><p>1、这个资源有很多我就不多介绍了，其中1一个就是官网。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ https://www.myeclipsecn.com/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、当然还有我自己用的，我用的是2010版本的，版本号比较低，这个看个人喜好了，当然我不太建议你去下载最新的，因为可能它不太稳定，不利于你程序的开发。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ 百度网盘链接：https://pan.baidu.com/s/1Iq7y7LRyt1mjJKfvPq0uzA  提取码：mdap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3、另外myeclipse需要激活，这个可以从网上找到很多激活码，这个我就不做过多的介绍了，如果需要可以联系我。</p>
+</li>
+<li><p>4、<font color="red">激活</font>就在你安装完成之后，会出现一个<font color="red">许可证按钮</font>，点击这个按钮，然后把你找的激活码输入进去就可以了。</p>
+</li>
+</ul>
+<hr>
+<h1 id="将tomcat部署到MyEclipse"><a href="#将tomcat部署到MyEclipse" class="headerlink" title="将tomcat部署到MyEclipse"></a>将tomcat部署到MyEclipse</h1><ul>
+<li>把tomcat部署到MyEclipse可以更加方便的启动tomcat，比直接在bin文件夹下启动更加便捷。部署如下图所示：</li>
+<li>1、先点击上方工具栏的<font color="red">window</font>，如下图所示：<br><img src="https://s2.ax1x.com/2019/10/31/KTtG5D.png" alt="JavaWeb1_3"></li>
+<li>2、点击window下面的<font color="red">preference</font>，在所搜框内输入<font color="red">tomcat</font>，然后选择版本，<br><img src="https://s2.ax1x.com/2019/10/31/KTU900.png" alt="JavaWeb1_4"></li>
+<li>之后选择tomcat所在文件目录<br><img src="https://s2.ax1x.com/2019/10/31/KTUu0x.png" alt="JavaWeb1_5"></li>
+</ul>
+<hr>
+<h1 id="将工程添加到tomcat中"><a href="#将工程添加到tomcat中" class="headerlink" title="将工程添加到tomcat中"></a>将工程添加到tomcat中</h1><ul>
+<li><font size="4">最后给大家说一下如何在MyEclipse中把工程添加到tomcat中：</font></li>
+<li><font size="3">第一步:找到服务器所在的窗口，也就是<font color="red">Servers</font></font><br><img src="https://s2.ax1x.com/2019/10/31/KTdedx.png" alt="JavaWeb1_6"></li>
+<li><font size="3">第二步:右键点击<font color="red">tomcat7.0</font>，在出来的菜单中点击<font color="red">Add Deployment…</font>，然后在出来的窗口内选择你要部署的工程。</font><br><img src="https://s2.ax1x.com/2019/10/31/KTdHTx.png" alt="JavaWeb1_7"></li>
+</ul>
+<hr>
+<p>最后谢谢各位看官的支持，我会继续写下去的。</p>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>tomcat的配置</tag>
+        <tag>MyEclipse的安装</tag>
+        <tag>将tomcat部署到MyEclipse</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用github和hexo搭建博客(四)</title>
     <url>/2019/10/20/%E4%BD%BF%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E5%9B%9B/</url>
     <content><![CDATA[<p>这是第三篇介绍通过hexo博客框架和github搭建个人博客的分享，希望能对你有所帮助。本篇博客主要介绍编辑工具Sublime Text的安装和本地Hexo的编辑以及把本地博客文件部署到Github。</p>
