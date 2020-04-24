@@ -1,6 +1,548 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>“JavaWeb(三)</title>
+    <url>/2020/04/24/%E2%80%9CJavaWeb-%E4%B8%89/</url>
+    <content><![CDATA[<p>本篇主要介绍css、css中的标签的使用以及盒子模型，最后简单介绍一下js，感兴趣的可以自己找相关课程进行学习，因为这个内容对javaweb不是重要内容，所以就不做详解。</p>
+<hr>
+<h1 id="一、css的简介"><a href="#一、css的简介" class="headerlink" title="一、css的简介"></a>一、css的简介</h1><h2 id="1、什么是css"><a href="#1、什么是css" class="headerlink" title="1、什么是css"></a>1、什么是css</h2><pre><code>层叠样式表，css是对html进行样式修饰语言
+层叠：就是层层覆盖叠加，如果不同的css样式对同一html标签进行修饰，样式有冲突的部分应用优先级高的，不冲突的部分共同作用
+样式表：就是css属性样式的集合    </code></pre><h2 id="2、css的作用"><a href="#2、css的作用" class="headerlink" title="2、css的作用"></a>2、css的作用</h2><pre><code>(1)修饰html的 使其html样式更加好看
+(2)提高样式代码的复用性
+(3)html的内容与样式相分离 便于后期维护    </code></pre><h2 id="3、css的引入方式和书写规范"><a href="#3、css的引入方式和书写规范" class="headerlink" title="3、css的引入方式和书写规范"></a>3、css的引入方式和书写规范</h2><pre><code>(1)内嵌样式
+    内嵌样式是把css的代码嵌入到html标签中
+    &lt;div style=&quot;color:red;font-size: 100px;&quot;&gt;你好啊 小朋友&lt;/div&gt;
+    语法：
+        (1)使用style属性将样式嵌入到html标签中
+        (2)属性的写法：属性：属性值
+        (3)多个属性之间使用分号;隔开
+    不建议使用
+(2)内部样式
+    在head标签中使用style标签进行css的引入
+    &lt;style type=&quot;text/css&quot;&gt;
+        div{color:red;font-size: 100px;}
+    &lt;/style&gt;
+    语法：
+        (1)使用style标签进行css的引入
+            &lt;style type=&quot;text/css&quot;&gt;
+                属性：type：告知浏览器使用css解析器去解析
+        (2)属性的写法：属性：属性值
+        (3)多个属性之间使用分号;隔开
+
+(3)外部样式
+    将css样式抽取成一个单独css文件 谁去使用谁就引用
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;demo1.css&quot;/&gt;
+    语法：
+        (1)创建css文件 将css属性写在css文件中
+        (2)在head中使用link标签进行引入
+            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css文件地址&quot;/&gt;
+            rel:代表要引入的文件与html的关系
+            type：告知浏览器使用css解析器去解析
+            href：css文件地址
+        (3)属性的写法：属性：属性值
+        (4)多个属性之间使用分号;隔开
+(4)@import方式
+    &lt;style type=&quot;text/css&quot;&gt;
+        @import url(&quot;css地址&quot;);
+    &lt;/style&gt;
+    link与@import方式的区别：
+        (1)link所有浏览器都支持 import部分低版本IE不支持
+        (2)import方式是等待html加载完毕之后在加载
+        (3)import方式不支持js的动态修改</code></pre><h1 id="二、css选择器"><a href="#二、css选择器" class="headerlink" title="二、css选择器"></a>二、css选择器</h1><h2 id="1、基本选择器"><a href="#1、基本选择器" class="headerlink" title="1、基本选择器"></a>1、基本选择器</h2><pre><code>(1)元素选择器
+    语法：html标签名{css属性}
+    示例：
+        &lt;span&gt;hello css!!!&lt;/span&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            span{color:red;font-size:100px; }
+        &lt;/style&gt;
+(2)id选择器    id唯一性
+    语法：#id的值{css属性}
+    示例：
+        &lt;div id=&quot;div1&quot;&gt;hello css1!!!&lt;/div&gt;
+        &lt;div id=&quot;div2&quot;&gt;hello css2!!!&lt;/div&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            #div1{background-color: red;}
+            #div2{background-color: pink;}
+        &lt;/style&gt;
+(3)class选择器
+    语法：.class的值{css属性}
+    示例：
+        &lt;div class=&quot;style1&quot;&gt;div1&lt;/div&gt;
+        &lt;div class=&quot;style1&quot;&gt;div2&lt;/div&gt;
+        &lt;div class=&quot;style2&quot;&gt;div3&lt;/div&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            .style1{background-color: red}
+            .style2{background-color: pink}
+        &lt;/style&gt;
+
+***选择器的优先级：id&gt;class&gt;元素</code></pre><h2 id="2、属性选择器"><a href="#2、属性选择器" class="headerlink" title="2、属性选择器"></a>2、属性选择器</h2><pre><code>语法：基本选择器[属性=‘属性值’]{css属性}
+示例：
+    &lt;form action=&quot;&quot;&gt;
+        name:&lt;input type=&quot;text&quot; /&gt;&lt;br/&gt;
+        pass:&lt;input type=&quot;password&quot; /&gt;&lt;br/&gt;
+    &lt;/form&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        input[type=&apos;text&apos;]{background-color: yellow}
+        input[type=&apos;password&apos;]{background-color: pink}
+    &lt;/style&gt;    </code></pre><h2 id="3、伪元素选择器"><a href="#3、伪元素选择器" class="headerlink" title="3、伪元素选择器"></a>3、伪元素选择器</h2><pre><code>a标签的伪元素选择器
+    语法：
+        静止状态    a:link{css属性}
+        悬浮状态    a:hover{css属性}
+        触发状态    a:active{css属性}
+        完成状态    a:visited{css属性}
+    示例：
+        &lt;a href=&quot;#&quot;&gt;点击我吧&lt;/a&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            a:link{color:blue}
+            a:hover{color:red}
+            a:active{color:yellow}
+            a:visited{color:green}
+        &lt;/style&gt;    </code></pre><h2 id="4、层级选择器"><a href="#4、层级选择器" class="headerlink" title="4、层级选择器"></a>4、层级选择器</h2><pre><code>语法：父级选择器 子级选择器 .....
+示例：
+    &lt;div id=&quot;d1&quot;&gt;
+        &lt;div class=&quot;dd1&quot;&gt;
+            &lt;span&gt;span1-1&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;dd2&quot;&gt;
+            &lt;span&gt;span1-2&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;d2&quot;&gt;
+        &lt;div class=&quot;dd1&quot;&gt;
+            &lt;span&gt;span1-1&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;dd2&quot;&gt;
+            &lt;span&gt;span1-2&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;style type=&quot;text/css&quot;&gt;
+        #d1 .dd2 span{color:red}
+    &lt;/style&gt;</code></pre><h1 id="三、css属性"><a href="#三、css属性" class="headerlink" title="三、css属性"></a>三、css属性</h1><h2 id="1、文字属性"><a href="#1、文字属性" class="headerlink" title="1、文字属性"></a>1、文字属性</h2><pre><code>font-size:大小
+font-family:字体类型        </code></pre><h2 id="2、文本属性"><a href="#2、文本属性" class="headerlink" title="2、文本属性"></a>2、文本属性</h2><pre><code>color:颜色
+text-decoration:下划线
+    属性值：none    underline    
+text-align:对齐方式
+    属性值：left  center  right
+    &lt;div&gt;hello css!!!&lt;/div&gt;
+    &lt;a href=&quot;#&quot;&gt;click me!!!&lt;/a&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        div{color:red;text-decoration: underline;text-align: right }
+        a{text-decoration: none;}
+    &lt;/style&gt;</code></pre><h2 id="3、背景属性"><a href="#3、背景属性" class="headerlink" title="3、背景属性"></a>3、背景属性</h2><pre><code>background-color:背景颜色
+background-image:背景图片
+    属性值：url(&quot;图片地址&quot;);
+background-repeat:平铺方式
+    属性值：默认横向纵向平铺
+            repeat:横向纵向平铺
+            no-repeat:不平铺
+            repeat-y：纵向
+            repeat-x：横向
+
+body{
+    background-color: black;
+    background-image: url(&quot;images/dog.gif&quot;);
+    background-repeat: repeat-y;
+}</code></pre><h2 id="4、列表属性"><a href="#4、列表属性" class="headerlink" title="4、列表属性"></a>4、列表属性</h2><pre><code>list-style-type:列表项前的小标志
+    属性值：太多了
+list-style-image:列表项前的小图片
+    属性值：url(&quot;图片地址&quot;);
+
+    &lt;ul&gt;
+        &lt;li&gt;黑马程序员&lt;/li&gt;
+        &lt;li&gt;黑马程序员&lt;/li&gt;
+        &lt;li&gt;黑马程序员&lt;/li&gt;
+        &lt;li&gt;黑马程序员&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        /* ul{list-style-type: decimal-leading-zero;} */
+        ul{list-style-image: url(&quot;images/forward.gif&quot;);}
+    &lt;/style&gt;</code></pre><h2 id="5、尺寸属性"><a href="#5、尺寸属性" class="headerlink" title="5、尺寸属性"></a>5、尺寸属性</h2><pre><code>width:宽度
+height:高度
+    &lt;div id=&quot;d1&quot;&gt;div1&lt;/div&gt;
+    &lt;div id=&quot;d2&quot;&gt;div2&lt;/div&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        #d1{background-color: red;width: 200px;height: 200px;}
+        #d2{background-color: pink;width: 200px;height: 200px;}
+    &lt;/style&gt;</code></pre><h2 id="6、显示属性"><a href="#6、显示属性" class="headerlink" title="6、显示属性"></a>6、显示属性</h2><pre><code>display:
+    属性值：none:隐藏
+            block:块级显示
+            inline：行级显示
+
+    &lt;form action=&quot;&quot;&gt;
+        name:&lt;input id=&quot;name&quot; type=&quot;text&quot; /&gt;&lt;span id=&quot;span&quot;&gt;对不起 输入不符合要求&lt;/span&gt;
+        &lt;br&gt;
+        pass:&lt;input id=&quot;pass&quot; type=&quot;password&quot; /&gt;
+        &lt;br&gt;
+        &lt;input id=&quot;btn&quot; type=&quot;button&quot; value=&quot;button&quot; /&gt;
+    &lt;/form&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        span{color:red;display: none}
+    &lt;/style&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        document.getElementById(&quot;btn&quot;).onclick = function(){
+            document.getElementById(&quot;span&quot;).style.display = &quot;inline&quot;;
+        };
+    &lt;/script&gt;</code></pre><h2 id="7、浮动属性"><a href="#7、浮动属性" class="headerlink" title="7、浮动属性"></a>7、浮动属性</h2><pre><code>float:
+    属性值：left  right
+            clear:清除浮动 left right both
+    缺点：    (1)影响相邻元素不能正常显示
+            (2)影响父元素不能正常显示</code></pre><h1 id="四、css盒子模型"><a href="#四、css盒子模型" class="headerlink" title="四、css盒子模型"></a>四、css盒子模型</h1><pre><code>border:
+    border-width:边框的宽度
+    border-color:边框的颜色
+    border-style:边框的线型
+
+    border-top:上边框
+    border-bottom:下边框
+    border-left:左边框
+    border-right:右边框
+
+padding:
+    代表边框内壁与内部元素之间的距离
+    padding:10px;代表上下左右都是10px
+    padding:1px 2px 3px 4px;上右下左
+    padding:1px 2px;上下/左右
+    padding:1px 2px 3px;
+    padding-top:单独设置
+margin:
+    代表边框外壁与其他元素之间的距离
+    margin:10px;代表上下左右都是10px
+    margin:1px 2px 3px 4px;上右下左
+    margin:1px 2px;上下/左右
+    margin:1px 2px 3px;
+    margin-top:单独设置</code></pre><p>一、js的简介<br>    1、js是什么<br>        js是可以嵌入到html中，是 基于对象 和 事件驱动 的 脚本语言<br>        特点：<br>            (1)交互性<br>            (2)安全性：js不能访问本地磁盘<br>            (3)跨平台：浏览器中都具备js解析器<br>    2、js能做什么<br>        (1)js能动态的修改(增删)html和css的代码<br>        (2)能动态的校验数据</p>
+<pre><code>3、js历史及组成
+    ECMAScript    BOM(浏览器对象模型)  DOM(文档对象模型)    
+4、js被引入的方式
+    (1)内嵌脚本
+        &lt;input type=&quot;button&quot; value=&quot;button&quot; onclick=&quot;alert(&apos;xxx&apos;)&quot; /&gt;            
+    (2)内部脚本
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            alert(&quot;xxx&quot;);
+        &lt;/script&gt;
+    (3)外部脚本
+        首先先创建一个js文件
+        其次在html中引入
+            &lt;script type=&quot;text/javascript&quot; src=&quot;demo1.js&quot;&gt;&lt;/script&gt;
+
+    js代码放在哪？
+        放在哪都行 但是在不影响html功能的前提下 越晚加载越好</code></pre><h1 id="二、js基本语法"><a href="#二、js基本语法" class="headerlink" title="二、js基本语法"></a>二、js基本语法</h1><h2 id="1、变量"><a href="#1、变量" class="headerlink" title="1、变量"></a>1、变量</h2><pre><code>(1)
+var x = 5;
+x = &apos;javascript&apos;;
+var y = &quot;hello&quot;;
+var b = true;
+(2)
+x = 5;</code></pre><h2 id="2、原始数据类型"><a href="#2、原始数据类型" class="headerlink" title="2、原始数据类型"></a>2、原始数据类型</h2><pre><code>(1)number:数字类型
+(2)string：字符串类型
+(3)boolean:布尔类型
+(4)null:空类型
+(5)underfind:未定义
+
+注意：number、boolean、string是伪对象
+
+类型转换：
+    number\boolean转成string
+        toString();
+    string\boolean转成number
+        parseInt()
+        parseFloat()
+        boolean不能转
+        string可以将数字字符串转换成number 如果“123a3sd5” 转成123
+    强制转换
+        Boolean()     强转成布尔
+            数字强转成布尔  非零就是true   零就是false
+            字符串强转成布尔  非“”(空字符串)就是true   空字符串“”就是false
+        Number()    强转成数字
+            布尔转数字 true转成1  false转成0
+            字符串转数字 不能强转</code></pre><h2 id="3、引用数据类型"><a href="#3、引用数据类型" class="headerlink" title="3、引用数据类型"></a>3、引用数据类型</h2><pre><code>java:    Object obj = new Object();
+js:        var obj = new Object();
+        var num = new Number();    </code></pre><h2 id="4、运算符"><a href="#4、运算符" class="headerlink" title="4、运算符"></a>4、运算符</h2><pre><code>(1)赋值运算符
+    var x = 5;
+(2)算数运算符
+    + - * / %
+    +: 遇到字符串变成连接
+    -：先把字符串转成数字然后进行运算
+    *: 先把字符串转成数字然后进行运算
+    /: 先把字符串转成数字然后进行运算
+(3)逻辑运算符
+    &amp;&amp;    ||
+(4)比较运算符
+    &lt;    &gt;    &gt;=    &lt;=    !=    ==
+    ===:全等：类型与值都要相等
+(5)三元运算符
+    3&lt;2?&quot;大于&quot;:&quot;小于&quot;
+(6)void运算符
+    &lt;a href=&quot;javascript:void(0);&quot;&gt;xxxxxx&lt;/a&gt;
+(7)类型运算符
+    typeof:判断数据类型 返回我的数据类型
+    instanceof：判断数据类型 是否是某种类型
+    var obj = new Object();
+    alert(typeof obj);//object
+    alert(obj instanceof Object);//true</code></pre><h2 id="5、逻辑语句"><a href="#5、逻辑语句" class="headerlink" title="5、逻辑语句"></a>5、逻辑语句</h2><pre><code>(1)if-else
+    //条件:
+    //数字非0 字符串非空====true
+        if(9){
+            alert(&quot;true--&quot;);
+        }else{
+            alert(&quot;false--&quot;);
+        }
+(2)switch
+    var x = &quot;java&quot;;
+    switch(x){
+        case &quot;css&quot;:
+            alert(&quot;css&quot;);
+            break;
+        case &quot;js&quot;:
+            alert(&quot;js&quot;);
+            break;
+        case &quot;java&quot;:
+            alert(&quot;java&quot;);
+            break;
+        default:
+            alert(&quot;def&quot;);
+    }
+
+(3)for
+     for(var i = 0;i&lt;5;i++){
+        alert(i);
+     }
+(4)for in
+    var arr = [1,3,5,7,&quot;js&quot;];
+     for(index in arr){//index代表角标
+        //alert(index);
+        alert(arr[index]);
+     }</code></pre><hr>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>css的简介、其中的标签以及盒子模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaWeb(二)</title>
+    <url>/2020/04/24/JavaWeb-%E4%BA%8C/</url>
+    <content><![CDATA[<p>今天主要介绍一下什么是HTML、HTML标签以及其中的细节问题。</p>
+<hr>
+<h1 id="一、html简介"><a href="#一、html简介" class="headerlink" title="一、html简介"></a>一、html简介</h1><h2 id="1、html是什么"><a href="#1、html是什么" class="headerlink" title="1、html是什么"></a>1、html是什么</h2><pre><code>Html是用来描述网页的一种语言。
+    (1)HTML 指的是超文本标记语言 (Hyper Text Markup Language)
+    (2)HTML 不是一种编程语言，而是一种标记语言(markup language,标记语言是一套标记标签(markup tag));
+    (3)HTML 使用标记标签来描述网页
+
+超文本 标记 语言
+    语言：
+        人与计算机交互的工具
+    超文本：
+        (1)普通文本不能实现的，超文本可以实现，能实现普通文本不能实现的功能
+        (2)包括超链接的文本
+    标记：
+        就是标签，不同的标签能实现不同的功能</code></pre><h2 id="2、html能做什么"><a href="#2、html能做什么" class="headerlink" title="2、html能做什么"></a>2、html能做什么</h2><pre><code>html通过标签的形式将信息展示给用户</code></pre><h2 id="3、html书写规范"><a href="#3、html书写规范" class="headerlink" title="3、html书写规范"></a>3、html书写规范</h2><pre><code>(1)html结构
+    &lt;html&gt;
+        &lt;head&gt;
+            包括资讯信息：整个页面的属性、指导浏览器解析的标签、引入外部文件的标签
+        &lt;/head&gt;
+        &lt;body&gt;
+            我们需要展示的信息
+        &lt;/body&gt;
+    &lt;/html&gt;
+(2)html标签是以尖括号包裹关键字成对出现的，有开始标签和结束标签，支持正确的嵌套
+(3)大部分标签有属性 格式：属性=“属性值”（多个属性之间用空格隔开）
+(4)空标签：功能比较单一 ，例如：&lt;br&gt;&lt;/br&gt; === &lt;br/&gt;
+(5)html不区分大小写，建议使用小写
+
+需求：写一段文字，将其中的部分文字变成红色，字号变大
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        我请大家吃狗不理&lt;font color=&quot;red&quot; size=&quot;5&quot;&gt;包子&lt;/font&gt;，
+        &lt;br/&gt;
+        大家很高兴！！！
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><h1 id="二、html基本标签"><a href="#二、html基本标签" class="headerlink" title="二、html基本标签"></a>二、html基本标签</h1><h2 id="1、文件标签-结构标签"><a href="#1、文件标签-结构标签" class="headerlink" title="1、文件标签(结构标签)"></a>1、文件标签(结构标签)</h2><pre><code>&lt;html&gt;&lt;html&gt;:根标签
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;:页面的标题
+&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;：内容
+    属性：
+        text:文本的颜色
+        bgcolor:背景色
+        background:背景图片
+
+    颜色的三种表示方式：
+        (1)单词：red green black 
+        (2)rgb三原色：reg(0,0,0)  0-255
+        (3)#000000  #ffffff  #325687   #377405</code></pre><h2 id="2、排版标签"><a href="#2、排版标签" class="headerlink" title="2、排版标签"></a>2、排版标签</h2><pre><code>(1)注释标签：&lt;!--注释--&gt;
+(2)换行标签：&lt;br/&gt;
+(3)段落标签：&lt;p&gt;文本文字&lt;/p&gt; 
+    特点：段与段之间有空行
+    属性：
+        align:对齐方式（有三个属性值：left  center   right）
+(4)水平线标签：&lt;hr/&gt;
+    属性：
+        width:长度
+        size:粗度
+        color：颜色
+        align:对齐方式
+
+    尺寸的写法：
+        （1）像素：10px
+        （2）百分比：占据副标签的百分比，会随着副标签的大小进行变化</code></pre><h2 id="3、块标签"><a href="#3、块标签" class="headerlink" title="3、块标签"></a>3、块标签</h2><pre><code>&lt;div&gt;&lt;/div&gt;:行级块标签
+&lt;span&gt;&lt;/span&gt;:行内块标签
+
+作用：
+    （1）&lt;div&gt;&lt;/div&gt;：div+css布局
+    （2）&lt;span&gt;&lt;/span&gt;：进行友好提示</code></pre><h2 id="4、文字标签"><a href="#4、文字标签" class="headerlink" title="4、文字标签"></a>4、文字标签</h2><pre><code>基本文字标签：&lt;font&gt;&lt;/font&gt;
+    属性：
+        color:颜色
+        size:大小（最大值:7，最小值:1，默认值:3）
+        face:字体类型，即字体，直接写文字就可以
+标题标签：&lt;h1&gt;&lt;/h1&gt;-&lt;h6&gt;&lt;/h6&gt;
+    随着数字的增大逐渐变小，字体是加粗的，内置字号 默认占据一行</code></pre><h2 id="5、清单标签（也称为列表标签）"><a href="#5、清单标签（也称为列表标签）" class="headerlink" title="5、清单标签（也称为列表标签）"></a>5、清单标签（也称为列表标签）</h2><pre><code>无序列表：&lt;ul&gt;&lt;/ul&gt;
+    &lt;li&gt;&lt;/li&gt;:列表项
+    属性：
+        type：有三个值，分别为disc、 square和circle
+
+    示例：
+    &lt;ul &gt;
+        &lt;li&gt;列表项&lt;/li&gt;
+        &lt;li&gt;列表项&lt;/li&gt;
+        &lt;li&gt;列表项&lt;/li&gt;                
+    &lt;/ul&gt;
+
+有序列表：&lt;ol&gt;&lt;/ol&gt;
+    &lt;li&gt;&lt;/li&gt;:列表项
+    属性：
+        type：1、A、a、I、i（数字、字母、罗马数字）
+        start:数字，代表首项开始位置
+
+    示例：
+    &lt;ol&gt;
+        &lt;li&gt;列表项&lt;/li&gt;
+        &lt;li&gt;列表项&lt;/li&gt;
+        &lt;li&gt;列表项&lt;/li&gt;    
+    &lt;/ol&gt;
+
+列表标签的作用：实现菜单项（可以实现横向或者纵向菜单）
+无序列表标签怎么去掉小圆点？HTML中不能直接去掉，没有这个属性值，需要在CSS中给li标签添加样式list-style:none;</code></pre><h2 id="6、图形标签：（自关闭标签）"><a href="#6、图形标签：（自关闭标签）" class="headerlink" title="6、图形标签：（自关闭标签）"></a>6、图形标签：<img>（自关闭标签）</h2><pre><code>属性：
+    src:图形地址
+    width:宽度
+    height:高度
+    border:边框
+    align:对齐方式，代表图片与相邻的文本的相对位置（有三个属性值：top middle bottom）
+    alt:图片的文字说明</code></pre><h2 id="7、链接标签："><a href="#7、链接标签：" class="headerlink" title="7、链接标签："></a>7、链接标签：<a></a></h2><pre><code>属性：
+    href:跳转页面地址
+    name:名称，锚点
+    target:_self(自己) _blank(新页面,之前的页面还有)， 默认是_self
+作用：
+    （1）页面跳转，注意：要调到外网必须要加协议
+    （2）访问锚点；回到锚点（顶部、底部、中间），在访问锚点时的书写格式：#name的值；</code></pre><h2 id="8、表格标签"><a href="#8、表格标签" class="headerlink" title="8、表格标签"></a>8、表格标签</h2><pre><code>&lt;table&gt;&lt;/table&gt;:
+    属性：
+        border:表格边框
+        width:表格的宽度
+        align:表格的对齐方式（&lt;tr align=&quot;center&quot;&gt;单元格里面的内容居中对齐&lt;tr&gt;）
+        bgcolor:背景颜色
+&lt;tr&gt;&lt;/tr&gt;: 代表行
+&lt;td&gt;&lt;/td&gt;：代表单元格
+    属性：
+        colspan:列合并
+        rowspan:行合并
+&lt;th&gt;&lt;/th&gt;：相等于&lt;td&gt;, 只是内置样式加粗居中
+&lt;caption&gt;&lt;/caption&gt;：表格的标题，即表头
+
+表格的作用：
+    (1)简单的实现一个表格样式
+    (2)进行页面布局
+
+示例：
+&lt;table&gt;
+    &lt;tr&gt;&lt;!--行--&gt;
+        &lt;th&gt;表格标头&lt;/th&gt;
+        &lt;td&gt;普通单元格&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;thead&gt;&lt;/thead&gt;、&lt;tbody&gt;&lt;/tbody&gt;、&lt;tfoot&gt;&lt;/tfoot&gt;
+作用：分块加载，用户体验比较好</code></pre><h1 id="三、html表单标签-重点"><a href="#三、html表单标签-重点" class="headerlink" title="三、html表单标签(重点)"></a>三、html表单标签(重点)</h1><h2 id="1、form标签："><a href="#1、form标签：" class="headerlink" title="1、form标签："></a>1、form标签：<form></form></h2><pre><code>属性：    
+    name:表单名称
+    action:提交的路径地址
+    method:提交方式（get和post）
+
+    get和post的区别（重点）：
+        (1)get提交将数据加在地址栏的后面，格式?name=value&amp;name=value；post提交将数据封装在请求体中
+            ?username=zhangsan&amp;password=123&amp;sex=male&amp;hobby=football&amp;hobby=paiqiu&amp;city=bj#
+        (2)get提交相对不安全；post提交相对安全
+        (3)get提交有大小限制，根据浏览器不同而不同；post不限制大小
+
+示例：
+&lt;form&gt; 
+    &lt;table&gt;
+        &lt;!--form里面嵌套table--&gt;            
+    &lt;/table&gt;            
+&lt;/form&gt;</code></pre><h2 id="2、input标签："><a href="#2、input标签：" class="headerlink" title="2、input标签："></a>2、input标签：</h2><pre><code>&lt;input type=&quot; &quot;/&gt;
+type属性:根据type属性实现各种不同功能的表单项；
+    text：普通的文本输入框；
+        name：username value=&quot;张三&quot;&lt;!--张三是默认值--&gt;
+    password：密码输入框；特点是显示的是掩码
+    radio：单选按钮
+        name：如果想让一组单选按钮互斥，就用指定同意name属性值，需要加value属性值；
+        checked：默认被选中；                
+    checkbox：复选框；
+        name：组的概念，需要加value属性值。
+        checked：默认被选中；
+    file：上传文件的控件
+    button：普通按钮，没有任何内置的功能；
+    submit：内置功能，点击会按照action地址提交
+    reset：重置，点击会清空之前填写的内容
+    image：图片按钮，功能类似与submit
+        src：加载图片
+        alt:图片的提示文字
+    hidden:隐藏表单，作用是在提交数据的时候，服务器需要这个数据，但是不需要用户看到。
+
+注意：name属性必须要写。</code></pre><h2 id="3、select标签-：下拉菜单"><a href="#3、select标签-：下拉菜单" class="headerlink" title="3、select标签()：下拉菜单"></a>3、select标签(<select></select>)：下拉菜单</h2><pre><code>属性：
+    name;表单项的名称
+option标签：可选项（下拉菜单之间的级联）
+    属性：
+        value，表单项的值
+        selected：默认被选中</code></pre><h2 id="4、textarea-文本域标签"><a href="#4、textarea-文本域标签" class="headerlink" title="4、textarea:文本域标签"></a>4、textarea:文本域标签</h2><pre><code>属性：
+    cols：列数
+    rows：行数
+注意：默认的文本值在标签体当中</code></pre><h1 id="四、html框架标签及其他"><a href="#四、html框架标签及其他" class="headerlink" title="四、html框架标签及其他"></a>四、html框架标签及其他</h1><h2 id="1、框架标签"><a href="#1、框架标签" class="headerlink" title="1、框架标签"></a>1、框架标签</h2><pre><code>frameset:
+    属性：
+        rows；按行划分
+        cols：按列划分
+        划分格式： rows=&quot;120,*&quot;
+frame:
+    属性：    
+        name：名称，方便target根据name值进行定位
+        src:加载的页面地址；</code></pre><h2 id="2、其他标签"><a href="#2、其他标签" class="headerlink" title="2、其他标签"></a>2、其他标签</h2><pre><code>&lt;meta&gt;
+    &lt;meta http-equiv=&quot;keywords&quot; content=&quot;keyword1,keyword2,keyword3&quot;&gt;
+    &lt;meta http-equiv=&quot;description&quot; content=&quot;this is my page&quot;&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+&lt;link&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./styles.css&quot;&gt;
+        href：引入css文件的地址
+&lt;script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;
+        src：js的文件地址</code></pre><h2 id="3、特殊字符"><a href="#3、特殊字符" class="headerlink" title="3、特殊字符"></a>3、特殊字符</h2><pre><code>&amp;nbsp; 空格
+&amp;gt;   大于号
+&amp;lt;   小于号
+&amp;copy; 版权符号
+&amp;reg;  注册符号</code></pre><hr>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>                
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>HTML简介以及其中的标签</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb(一)</title>
     <url>/2019/10/30/JavaWeb-%E4%B8%80/</url>
     <content><![CDATA[<p>大家好，最近学习了JavaWeb相关课程，写一篇博客来与大家分享我的学习心得。<br>俗话说的好啊，”工欲善其事，必先利其器”，今天这篇文章主要介绍了各种工具的的安装及使用。希望能对你有所帮助。</p>
