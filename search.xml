@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaWeb(四)</title>
+    <url>/2020/04/25/JavaWeb-%E5%9B%9B/</url>
+    <content><![CDATA[<p>今天主要分享一下JDBC规范、如何在程序中如何使用JDBC还有JDBC中常用的类和接口。</p>
+<hr>
+<h1 id="JDBC概述"><a href="#JDBC概述" class="headerlink" title="JDBC概述"></a>JDBC概述</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>   &nbsp;Java数据库连接，（Java Database Connectivity，简称JDBC）是Java语言中用来规范客户端程序如何来访问数据库的应用程序接口，提供了诸如查询和更新数据库中数据的方法。JDBC也是Sun Microsystems的商标。我们通常说的JDBC是面向关系型数据库的。</p>
+<h2 id="为什么要使用JDBC？"><a href="#为什么要使用JDBC？" class="headerlink" title="为什么要使用JDBC？"></a>为什么要使用JDBC？</h2><p>   JDBC:java database connectivity SUN公司提供的一套操作数据库的标准规范。<br>   JDBC与数据库驱动的关系：接口与实现的关系。</p>
+<h2 id="JDBC规范（掌握四个核心对象）："><a href="#JDBC规范（掌握四个核心对象）：" class="headerlink" title="JDBC规范（掌握四个核心对象）："></a>JDBC规范（掌握四个核心对象）：</h2><p>   DriverManager:用于注册驱动<br>   Connection: 表示与数据库创建的连接<br>   Statement: 操作数据库sql语句的对象<br>   ResultSet: 结果集或一张虚拟表</p>
+<h2 id="开发第一个JDBC的程序的准备："><a href="#开发第一个JDBC的程序的准备：" class="headerlink" title="开发第一个JDBC的程序的准备："></a>开发第一个JDBC的程序的准备：</h2><ul>
+<li>首先说一下JDBC规范在哪里？<br>JDK中:<br>  java.sql下的所有类;<br>  javax.sql下的所有类;</li>
+<li>数据库厂商提供的驱动：jar文件<br><img src="1.png" alt></li>
+</ul>
+<h1 id="第一个JDBC程序的开发"><a href="#第一个JDBC程序的开发" class="headerlink" title="第一个JDBC程序的开发"></a>第一个JDBC程序的开发</h1><h2 id="实现查询数据库信息在java控制台打印"><a href="#实现查询数据库信息在java控制台打印" class="headerlink" title="实现查询数据库信息在java控制台打印"></a>实现查询数据库信息在java控制台打印</h2><h3 id="首先创建数据库与表"><a href="#首先创建数据库与表" class="headerlink" title="首先创建数据库与表"></a>首先创建数据库与表</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ create database day06;</span><br><span class="line">use day06;</span><br><span class="line"></span><br><span class="line">create table users(</span><br><span class="line">	id int primary key auto_increment,</span><br><span class="line">	name varchar(40),</span><br><span class="line">	password varchar(40),</span><br><span class="line">	email varchar(60),</span><br><span class="line">	birthday date</span><br><span class="line">)character <span class="built_in">set</span> utf8 collate utf8_general_ci;</span><br><span class="line"></span><br><span class="line">insert into users(name,password,email,birthday) values(<span class="string">'zs'</span>,<span class="string">'123456'</span>,<span class="string">'zs@sina.com'</span>,<span class="string">'1980-12-04'</span>);</span><br><span class="line">insert into users(name,password,email,birthday) values(<span class="string">'lisi'</span>,<span class="string">'123456'</span>,<span class="string">'lisi@sina.com'</span>,<span class="string">'1981-12-04'</span>);</span><br><span class="line">insert into users(name,password,email,birthday) values(<span class="string">'wangwu'</span>,<span class="string">'123456'</span>,<span class="string">'wangwu@sina.com'</span>,<span class="string">'1979-12-04'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="2.png" alt></p>
+<h3 id="接着创建java-project项目，添加数据库驱动（Jar包）"><a href="#接着创建java-project项目，添加数据库驱动（Jar包）" class="headerlink" title="接着创建java project项目，添加数据库驱动（Jar包）"></a>接着创建java project项目，添加数据库驱动（Jar包）</h3><p>这个步骤就不演示了，自己应该会做哦。</p>
+<h3 id="实现JDBC的操作"><a href="#实现JDBC的操作" class="headerlink" title="实现JDBC的操作"></a>实现JDBC的操作</h3><ul>
+<li>1、注册驱动</li>
+<li>2、创建连接</li>
+<li>3、得到执行sql语句的Statement对象</li>
+<li>4、执行sql语句，并返回结果</li>
+<li>5、处理结果</li>
+<li>6、关闭资源<br><img src="3.png" alt><br><img src="4.png" alt></li>
+</ul>
+<h1 id="JDBC常用类和接口详解"><a href="#JDBC常用类和接口详解" class="headerlink" title="JDBC常用类和接口详解"></a>JDBC常用类和接口详解</h1><h2 id="java-sql-Drivermanager类-创建连接"><a href="#java-sql-Drivermanager类-创建连接" class="headerlink" title="java.sql.Drivermanager类 : 创建连接"></a>java.sql.Drivermanager类 : 创建连接</h2><ul>
+<li><p>a.注册驱动 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ DriverManager.registerDriver(new com.mysql.jdbc.Driver());不建议使用</span><br><span class="line">$ 原因有2个：</span><br><span class="line">  导致驱动被注册2次。</span><br><span class="line">  强烈依赖数据库的驱动jar</span><br><span class="line">解决办法：</span><br><span class="line">使用Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);来进行注册驱动</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>b.与数据库建立连接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ static Connection getConnection(String url, String user, String password)  试图建立到给定数据库 URL 的连接</span><br><span class="line">$ getConnection(<span class="string">"jdbc:mysql://localhost:3306/day06"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">$ URL:SUN公司与数据库厂商之间的一种协议。</span><br><span class="line">  jdbc:mysql://localhost:3306/day06</span><br><span class="line">  协议 子协议  IP :端口号 数据库</span><br><span class="line">  mysql: jdbc:mysql://localhost:3306/day14 或者 jdbc:mysql:///day14（默认本机连接）</span><br><span class="line">  oracle: jdbc:oracle:thin:@localhost:1521:sid</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="java-sql-Connection接口-一个连接"><a href="#java-sql-Connection接口-一个连接" class="headerlink" title="java.sql.Connection接口:一个连接"></a>java.sql.Connection接口:一个连接</h2><pre><code>接口的实现在数据库驱动中。所有与数据库交互都是基于连接对象的。
+Statement  createStatement(); //创建操作sql语句的对象</code></pre><h2 id="java-sql-Statement接口-操作sql语句，并返回相应的结果的对象-小货车"><a href="#java-sql-Statement接口-操作sql语句，并返回相应的结果的对象-小货车" class="headerlink" title="java.sql.Statement接口:操作sql语句，并返回相应的结果的对象()小货车"></a>java.sql.Statement接口:操作sql语句，并返回相应的结果的对象()小货车</h2><ul>
+<li>接口的实现在数据库驱动中。用于执行静态 SQL 语句并返回它所生成结果的对象。</li>
+<li>ResultSet  executeQuery(String sql) 根据查询语句返回结果集。只能执行select语句。</li>
+<li>int executeUpdate(String sql) 根据执行的DML（insert update delete）语句，返回受影响的行数。</li>
+<li>oolean execute(String sql)此方法可以执行任意sql语句。返回boolean值，表示是否返回ResultSet结果集。仅当执行select语句，且有返回结果时返回true, 其它语句都返回false;</li>
+</ul>
+<h2 id="java-sql-ResultSet接口-结果集（客户端存表数据的对象）"><a href="#java-sql-ResultSet接口-结果集（客户端存表数据的对象）" class="headerlink" title="java.sql.ResultSet接口: 结果集（客户端存表数据的对象）"></a>java.sql.ResultSet接口: 结果集（客户端存表数据的对象）</h2><h3 id="封装结果集的"><a href="#封装结果集的" class="headerlink" title="封装结果集的"></a>封装结果集的</h3><ul>
+<li>提供一个游标，默认游标指向结果集第一行之前。</li>
+<li>调用一次next()，游标向下移动一行。</li>
+<li>提供一些get方法。</li>
+<li>封装数据的方法<br>  a、 Object getObject(int columnIndex); 根据序号取值，索引从1开始<br>  b、 Object getObject(String ColomnName); 根据列名取值。</li>
+<li>将结果集中的数据封装到javaBean中<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ java的数据类型与数据库中的类型的关系</span><br><span class="line">     byte          tityint</span><br><span class="line">     short         smallint</span><br><span class="line">     int           int</span><br><span class="line">     long          bigint</span><br><span class="line">     <span class="built_in">float</span>         <span class="built_in">float</span></span><br><span class="line">     double        double</span><br><span class="line">     String        char varchar </span><br><span class="line">     Date          date</span><br><span class="line">$ 下面是一些方法：</span><br><span class="line">boolean next()	将光标从当前位置向下移动一行</span><br><span class="line">int getInt(int colIndex)	以int形式获取ResultSet结果集当前行指定列号值</span><br><span class="line">int getInt(String colLabel)	以int形式获取ResultSet结果集当前行指定列名值</span><br><span class="line"><span class="built_in">float</span> getFloat(int colIndex)	以<span class="built_in">float</span>形式获取ResultSet结果集当前行指定列号值</span><br><span class="line"><span class="built_in">float</span> getFloat(String colLabel)	以<span class="built_in">float</span>形式获取ResultSet结果集当前行指定列名值</span><br><span class="line">String getString(int colIndex)	以String 形式获取ResultSet结果集当前行指定列号值</span><br><span class="line">String getString(String colLabel)	以String形式获取ResultSet结果集当前行指定列名值</span><br><span class="line">Date getDate(int columnIndex);  </span><br><span class="line">Date getDate(String columnName);</span><br><span class="line">void close()	关闭ResultSet 对象</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="可移动游标的方法"><a href="#可移动游标的方法" class="headerlink" title="可移动游标的方法"></a>可移动游标的方法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">boolean next()  将光标从当前位置向前移一行。</span><br><span class="line">boolean previous() 将光标移动到此 ResultSet 对象的上一行。</span><br><span class="line">boolean absolute(int row) 参数是当前行的索引，从1开始  根据行的索引定位移动的指定索引行。</span><br><span class="line">void afterLast()  将光标移动到末尾，正好位于最后一行之后。</span><br><span class="line">void beforeFirst() 将光标移动到开头，正好位于第一行之前。</span><br></pre></td></tr></table></figure>
+
+<h3 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h3><h4 id="资源有限，正确关闭"><a href="#资源有限，正确关闭" class="headerlink" title="资源有限，正确关闭"></a>资源有限，正确关闭</h4><p><img src="5.png" alt><br><img src="6.png" alt></p>
+<h1 id="SQL注入问题：preparedStatement"><a href="#SQL注入问题：preparedStatement" class="headerlink" title="SQL注入问题：preparedStatement"></a>SQL注入问题：preparedStatement</h1><ul>
+<li>preparedStatement：预编译对象,是Statement对象的子类。</li>
+<li>特点：<br>  a、性能要高<br>  b、会把sql语句先编译<br>  c、sql语句中的参数会发生变化，过滤掉用户输入的关键字。<br><img src="7.png" alt><br>补充一个例子：<br><img src="8.png" alt><blockquote>
+  <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>JDBC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb(三)</title>
     <url>/2020/04/24/%E2%80%9CJavaWeb-%E4%B8%89/</url>
     <content><![CDATA[<p>本篇主要介绍css、css中的标签的使用以及盒子模型，最后简单介绍一下js，感兴趣的可以自己找相关课程进行学习，因为这个内容对javaweb不是重要内容，所以就不做详解。</p>
