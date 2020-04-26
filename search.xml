@@ -1,6 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaWeb(五)</title>
+    <url>/2020/04/26/JavaWeb-%E4%BA%94/</url>
+    <content><![CDATA[<p>大家好，今天准备分享一下我最近学习的xml的相关知识以及介绍一下tomcat服务器的安装和使用，最后介绍一下HTTP协议。</p>
+<hr>
+<h1 id="xml的简介及其使用"><a href="#xml的简介及其使用" class="headerlink" title="xml的简介及其使用"></a>xml的简介及其使用</h1><ul>
+<li><p>XML：eXtensible Markup Language 可扩展标记语言 version=”1.0”</p>
+<ul>
+<li><p>可扩展：所有的标签都是自定义的。  </p>
+</li>
+<li><p>功能：数据存储</p>
+<ul>
+<li>配置文件</li>
+<li>数据传输</li>
+</ul>
+</li>
+<li><p>html与xml区别：</p>
+<ul>
+<li>html语法松散，xml语法严格</li>
+<li>html做页面展示，xml做数据存储</li>
+<li>html所有标签都是预定义的，xml所有标签都是自定义的</li>
+</ul>
+</li>
+<li><p>W3C:word wide web consortiem  万维网联盟</p>
+</li>
+<li><p>xml语法：</p>
+<ul>
+<li><p>文档声明：</p>
+<ul>
+<li>必须写在xml文档的第一行。</li>
+<li>写法：<?xml version="1.0" ?></li>
+<li>属性：    <ul>
+<li>version：版本号 固定值 1.0</li>
+<li>encoding:指定文档的码表。默认值为 iso-8859-1</li>
+<li>standalone：指定文档是否独立  yes 或 no</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>元素：xml文档中的标签</p>
+<ul>
+<li>文档中必须有且只能有一个根元素</li>
+<li>元素需要正确闭合。<body><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body> <br></li>
+<li>元素需要正确嵌套</li>
+<li>元素名称要遵守：<ul>
+<li>元素名称区分大小写</li>
+<li>数字不能开头</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文本：</p>
+<ul>
+<li>转义字符：&gt;</li>
+<li>CDATA: 里边的数据会原样显示<ul>
+<li><!--[CDATA[ 数据内容 ]]-->
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>属性：</p>
+<ul>
+<li>属性值必须用引号引起来。单双引号都行</li>
+</ul>
+</li>
+<li><p>注释：和HTML中一样</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &lt;!-- --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理指令：</p>
+<pre><code class="bash">$ &lt;?xml-stylesheet <span class="built_in">type</span>=<span class="string">"text/css"</span> href=<span class="string">"1.css"</span>?&gt;</code></pre>
+</li>
+<li><p>xml约束：</p>
+</li>
+<li><p>约束就是xml的书写规则</p>
+</li>
+<li><p>约束的分类：<br>  dtd：</p>
+<pre><code>dtd分类：
+    * 内部dtd：在xml内部定义dtd
+    * 外部dtd：在外部文件中定义dtd
+        * 本地dtd文件：&lt;!DOCTYPE students SYSTEM  &quot;student.dtd&quot;&gt;
+        * 网络dtd文件：&lt;!DOCTYPE students PUBLIC &quot;名称空间&quot;  &quot;student.dtd&quot;&gt;</code></pre><p>  schema：</p>
+<pre><code>导入xsd约束文档：
+        1、编写根标签
+        2、引入实例名称空间 xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        3、引入名称空间 xsi:schemaLocation=&quot;http://www.itcast.cn/xml student.xsd&quot;    
+        4、引入默认的名称空间</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="tomcat-服务器"><a href="#tomcat-服务器" class="headerlink" title="tomcat 服务器"></a>tomcat 服务器</h1><h2 id="tomcat的下载"><a href="#tomcat的下载" class="headerlink" title="tomcat的下载"></a>tomcat的下载</h2><ul>
+<li>tomcat官方站点 <a href="http://tomcat.apache.org" target="_blank" rel="noopener">tomcat官网</a></li>
+</ul>
+<h2 id="tomcat的安装"><a href="#tomcat的安装" class="headerlink" title="tomcat的安装"></a>tomcat的安装</h2><ul>
+<li>直接解压到指定目录即可。（注：目录不要太深；目录不要有中文或空格）</li>
+</ul>
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><ul>
+<li>以我自己的为例: F:\apache-tomcat-7.0.52\bin\startup.bat</li>
+<li>注：启动服务的前提：<ul>
+<li>配置JAVA_HOME：F:\apache-tomcat-7.0.52\bin\startup.bat 才能执行命令</li>
+<li>配置CATALINA_HOME: F:\apache-tomcat-7.0.52<ul>
+<li>startup.bat 启动命令</li>
+<li>shutdown.bat 停止命令</li>
+</ul>
+</li>
+<li>如果tomcat端口被占用，解决办法</li>
+<li>1、修改F:\apache-tomcat-7.0.52\conf\server.xml<pre><code>第70行：  &lt;Connector port=&quot;8081&quot;/&gt;</code></pre></li>
+<li>2、 关闭端口号对应的进程：<pre><code>cmd--&gt;netstat -ano --&gt;找到pid--&gt;任务管理器--&gt;显示pid--&gt;关闭进程</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="测试服务是否启动成功"><a href="#测试服务是否启动成功" class="headerlink" title="测试服务是否启动成功"></a>测试服务是否启动成功</h2><ul>
+<li>在浏览器地址栏输入 <a href="http://loaclhost:8080" target="_blank" rel="noopener">http://loaclhost:8080</a><br><img src="1.png" alt></li>
+<li>其他的关于tomcat目录结构，在<a href="https://ferryman-jack.github.io/2019/10/30/JavaWeb-%E4%B8%80/" target="_blank" rel="noopener">JavaWeb(一)</a>有介绍，可以前往查看。</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><h2 id="http协议概述"><a href="#http协议概述" class="headerlink" title="http协议概述"></a>http协议概述</h2><ul>
+<li>HTTP是HyperText Transfer Protocol(超文本传输协议)的简写，传输HTML文件。</li>
+<li>用于定义WEB浏览器与WEB服务器之间交换数据的过程及数据本身的格式。</li>
+</ul>
+<h2 id="请求部分"><a href="#请求部分" class="headerlink" title="请求部分"></a>请求部分</h2><p><img src="2.png" alt></p>
+<h3 id="请求消息行"><a href="#请求消息行" class="headerlink" title="请求消息行"></a>请求消息行</h3><ul>
+<li>GET  /day08_02/1.html  HTTP/1.1(协议/版本)</li>
+<li>请求方式：Get（默认）  POST  DELETE  HEAD等<ul>
+<li>GET：明文传输 不安全，数据量有限，不超过1kb</li>
+<li>GET /day08_02/1.html?uName=tom&amp;pwd=123 HTTP/1.1</li>
+<li>POST: 暗文传输，安全。数据量没有限制。</li>
+</ul>
+</li>
+<li>URI：统一资源标识符。去协议和IP地址。</li>
+</ul>
+<h3 id="请求消息头"><a href="#请求消息头" class="headerlink" title="请求消息头"></a>请求消息头</h3><ul>
+<li><p>从第2行到空行处，都叫消息头</p>
+<ul>
+<li><p>Accept:浏览器可接受的MIME类型<br>   告诉服务器客户端能接收什么样类型的文件。</p>
+</li>
+<li><p>Accept-Charset: 浏览器通过这个头告诉服务器，它支持哪种字符集</p>
+</li>
+<li><p>Accept-Encoding:浏览器能够进行解码的数据编码方式，比如gzip </p>
+</li>
+<li><p>Accept-Language:浏览器所希望的语言种类，当服务器能够提供一种以上的语言版本时要用到。 可以在浏览器中进行设置。</p>
+</li>
+<li><p>Host:初始URL中的主机和端口 </p>
+</li>
+<li><p>Referrer:包含一个URL，用户从该URL代表的页面出发访问当前请求的页面 </p>
+</li>
+<li><p>Content-Type:内容类型<br>  告诉服务器浏览器传输数据的MIME类型，文件传输的类型 application/x-www-form-urlencoded</p>
+</li>
+<li><p>If-Modified-Since: Wed, 02 Feb 2011 12:04:56 GMT利用这个头与服务器的文件进行比对，如果一致，则从缓存中直接读取文件。</p>
+</li>
+<li><p>User-Agent:浏览器类型.</p>
+</li>
+<li><p>Content-Length:表示请求消息正文的长度 </p>
+</li>
+<li><p>Connection:表示是否需要持久连接。如果服务器看到这里的值为“Keep -Alive”，或者看到请求使用的是HTTP 1.1（HTTP 1.1默认进行持久连接 </p>
+</li>
+<li><p>Cookie:这是最重要的请求头信息之一</p>
+</li>
+<li><p>Date：Date: Mon, 22 Aug 2011 01:55:39 GMT请求时间GMT</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="消息正文"><a href="#消息正文" class="headerlink" title="消息正文:"></a>消息正文:</h3><ul>
+<li>当请求方式是POST方式时，才能看见消息正文<br>uName=tom&amp;pwd=123</li>
+</ul>
+<h2 id="响应部分"><a href="#响应部分" class="headerlink" title="响应部分"></a>响应部分</h2><p><img src="3.png" alt></p>
+<h3 id="响应消息行"><a href="#响应消息行" class="headerlink" title="响应消息行"></a>响应消息行</h3><ul>
+<li>第一行：<ul>
+<li>HTTP/1.1   200   OK</li>
+<li>协议/版本   响应状态码  对响应码的描述（一切正常）</li>
+</ul>
+</li>
+<li>响应状态码：常用的就40多个。<ul>
+<li>200(正常)  一切正常</li>
+<li>302/307(临时重定向)</li>
+<li>304(未修改) 表示客户机缓存的版本是最新的，客户机可以继续使用它，无需到服务器请求。</li>
+<li>404(找不到)  服务器上不存在客户机所请求的资源。</li>
+<li>500(服务器内部错误)</li>
+</ul>
+</li>
+</ul>
+<h3 id="响应消息头"><a href="#响应消息头" class="headerlink" title="响应消息头"></a>响应消息头</h3><ul>
+<li>Location: <class color="black"><a href="http://www.it315.org/index.jsp指示新的资源的位置" target="_blank" rel="noopener">http://www.it315.org/index.jsp指示新的资源的位置</a></class><pre><code>通常和302/307一起使用，完成请求重定向</code></pre></li>
+<li>Server:apache tomcat指示服务器的类型</li>
+<li>Content-Encoding: gzip服务器发送的数据采用的编码类型</li>
+<li>Content-Length: 80 告诉浏览器正文的长度</li>
+<li>Content-Language: zh-cn服务发送的文本的语言</li>
+<li>Content-Type: text/html; charset=GB2312服务器发送的内容的MIME类型</li>
+<li>Last-Modified: Tue, 11 Jul 2000 18:23:51 GMT文件的最后修改时间</li>
+<li>Refresh: 1;url=<a href="http://www.it315.org指示客户端刷新频率。单位是秒" target="_blank" rel="noopener">http://www.it315.org指示客户端刷新频率。单位是秒</a></li>
+<li>Content-Disposition: attachment; filename=aaa.zip指示客户端下载文件</li>
+<li>Set-Cookie:SS=Q0=5Lb_nQ; path=/search服务器端发送的Cookie</li>
+<li>Expires: -1</li>
+<li>Cache-Control: no-cache (1.1)  </li>
+<li>Pragma: no-cache   (1.0)  表示告诉客户端不要使用缓存</li>
+<li>Connection: close/Keep-Alive   </li>
+<li>Date: Tue, 11 Jul 2000 18:23:51 GMT</li>
+</ul>
+<h3 id="响应正文"><a href="#响应正文" class="headerlink" title="响应正文"></a>响应正文</h3><ul>
+<li>和网页右键“查看源码”看到的内容一样。</li>
+</ul>
+<hr>
+<p>最后谢谢各位看官的支持，我会继续写下去的。</p>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>
+
+
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>xml简介及tomcat的使用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb(四)</title>
     <url>/2020/04/25/JavaWeb-%E5%9B%9B/</url>
     <content><![CDATA[<p>今天主要分享一下JDBC规范、如何在程序中如何使用JDBC还有JDBC中常用的类和接口。</p>
