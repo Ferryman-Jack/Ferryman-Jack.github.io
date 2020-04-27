@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaWeb(六)</title>
+    <url>/2020/04/27/JavaWeb-%E5%85%AD/</url>
+    <content><![CDATA[<p>莫道前路艰难，只是自己还没有尽力。<br>今天与大家分享一下自己学习Servlet的内容，我觉得挺重要的，尤其是生命周期，及其执行过程。</p>
+<h1 id="Servlet简介"><a href="#Servlet简介" class="headerlink" title="Servlet简介"></a>Servlet简介</h1><h2 id="什么是Servlet"><a href="#什么是Servlet" class="headerlink" title="什么是Servlet"></a>什么是Servlet</h2><ul>
+<li>servlet 是运行在 Web 服务器中的小型 Java 程序（即：服务器端的小应用程序）。servlet 通常通过 HTTP（超文本传输协议）接收和响应来自 Web 客户端的请求。</li>
+</ul>
+<h2 id="下面编写一个Servlet程序来看看怎么用Servlet"><a href="#下面编写一个Servlet程序来看看怎么用Servlet" class="headerlink" title="下面编写一个Servlet程序来看看怎么用Servlet"></a>下面编写一个Servlet程序来看看怎么用Servlet</h2><ul>
+<li>a、写一个java类实现接口，实现里面未实现的的方法<br><img src="1.png" alt></li>
+<li>b、修改web.xml文件，给servlet提供一个可以访问的URL地址<br><img src="2.png" alt></li>
+<li>c、将应用部署到tomcat服务器，前面已经讲解了，这里就不做赘述了</li>
+<li>d、测试：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ http://localhost:8080/day06_servlet/dem01  此处的demo1是由在web.xml文件中url-pattern配置的</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h1><ul>
+<li>下面用一张图讲解一下servlet的执行过程。<br><img src="3.png" alt></li>
+</ul>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><ul>
+<li>实例化–&gt;初始化–&gt;服务–&gt;销毁</li>
+<li>出生：（实例化–&gt;初始化）第一次访问Servlet就出生（默认情况下）</li>
+<li>活着：（服务）应用活着，servlet就活着</li>
+<li>死亡：（销毁）应用卸载了servlet就销毁。<br><img src="4.png" alt><br><img src="5.png" alt><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ 小知识：如何在服务启动时就创建servlet</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="6.png" alt></p>
+<h1 id="Servlet的三种创建方式"><a href="#Servlet的三种创建方式" class="headerlink" title="Servlet的三种创建方式"></a>Servlet的三种创建方式</h1><h2 id="第一种：实现javax-servlet-Servlet接口"><a href="#第一种：实现javax-servlet-Servlet接口" class="headerlink" title="第一种：实现javax.servlet.Servlet接口"></a>第一种：实现javax.servlet.Servlet接口</h2><ul>
+<li>上面编写的第一个servlet程序已经实现，可以参考上面的程序。</li>
+</ul>
+<h2 id="第二种：继承javax-servlet-GenericServlet类-适配器模式"><a href="#第二种：继承javax-servlet-GenericServlet类-适配器模式" class="headerlink" title="第二种：继承javax.servlet.GenericServlet类(适配器模式)"></a>第二种：继承javax.servlet.GenericServlet类(适配器模式)</h2><p><img src="7.png" alt></p>
+<h2 id="第三种：继承javax-servlet-http-HttpServlet类（模板方法设计模式）"><a href="#第三种：继承javax-servlet-http-HttpServlet类（模板方法设计模式）" class="headerlink" title="第三种：继承javax.servlet.http.HttpServlet类（模板方法设计模式）"></a>第三种：继承javax.servlet.http.HttpServlet类（模板方法设计模式）</h2><ul>
+<li>开发中常用<br><img src="8.png" alt></li>
+<li>他们的关系如下：<br><img src="9.png" alt></li>
+</ul>
+<h1 id="servlet映射细节"><a href="#servlet映射细节" class="headerlink" title="servlet映射细节"></a>servlet映射细节</h1><ul>
+<li>映射细节1：<br><img src="10.png" alt></li>
+<li>映射细节2：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通配符* 代表任意字符串</span><br><span class="line">url-pattern: *.<span class="keyword">do</span>  以*.字符串的请求都可以访问 注：不要加/</span><br><span class="line">url-pattern: /*  任意字符串都可以访问</span><br><span class="line">url-pattern： /action/* 以/action开头的请求都可以访问</span><br><span class="line">匹配规则：</span><br><span class="line">优先级：从高到低</span><br><span class="line">绝对匹配--&gt;  /开头匹配 --&gt; 扩展名方式匹配</span><br><span class="line">如果url-pattern的值是/，表示执行默认映射。所有资源都是servlet</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><ul>
+<li>单实例：每次访问多线程</li>
+<li>解决线程安全问题的最佳办法，不要写全局变量，而写局部变量。</li>
+</ul>
+<h1 id="Servlet获取配置信息"><a href="#Servlet获取配置信息" class="headerlink" title="Servlet获取配置信息"></a>Servlet获取配置信息</h1><h2 id="servletconfig的使用"><a href="#servletconfig的使用" class="headerlink" title="servletconfig的使用"></a>servletconfig的使用</h2><ul>
+<li>作用一：可以获取servlet配置信息</li>
+<li>方式一：<br><img src="11.png" alt></li>
+<li>方式二：<br><img src="12.png" alt></li>
+<li>方式三：<br><img src="13.png" alt></li>
+<li>作用二：可以获得ServletContext对象</li>
+</ul>
+<h1 id="servletContext-重要"><a href="#servletContext-重要" class="headerlink" title="servletContext(重要)"></a>servletContext(重要)</h1><ul>
+<li>ServletContext: 代表的是整个应用。一个应用只有一个ServletContext对象。单实例。</li>
+</ul>
+<h2 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h2><h3 id="域对象：在一定范围内（当前应用），使多个Servlet共享数据。"><a href="#域对象：在一定范围内（当前应用），使多个Servlet共享数据。" class="headerlink" title="域对象：在一定范围内（当前应用），使多个Servlet共享数据。"></a>域对象：在一定范围内（当前应用），使多个Servlet共享数据。</h3><ul>
+<li>常用方法：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">void setAttribute(String name,object value);//向ServletContext对象的map中添加数据</span><br><span class="line">Object getAttribute(String name);//从ServletContext对象的map中取数据</span><br><span class="line">void rmoveAttribute(String name);//根据name去移除数据</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="14.png" alt></p>
+<h3 id="获取全局配置信息"><a href="#获取全局配置信息" class="headerlink" title="获取全局配置信息"></a>获取全局配置信息</h3><ul>
+<li>修改web.xml文件：<br><img src="15.png" alt></li>
+<li>String  getInitParameter(String name) //根据配置文件中的key得到value<br><img src="16.png" alt></li>
+</ul>
+<h3 id="获取资源路径"><a href="#获取资源路径" class="headerlink" title="获取资源路径"></a>获取资源路径</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- String  getRealPath(String path);//根据资源名称得到资源的绝对路径，可以得到当前应用任何位置的任何资源。</span><br></pre></td></tr></table></figure>
+
+<p><img src="17.png" alt></p>
+<p>###实现Servlet的转发。<br><img src="18.png" alt></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$  RequestDispatcher  getRequestDispatcher(String path)  //参数表示要跳转到哪去</span><br></pre></td></tr></table></figure>
+
+<p><img src="19.png" alt></p>
+<blockquote>
+    <p>本文作者：Jack<br>版权声明：未经授权禁止使用，转载请说明出处！</p>
+</blockquote>]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>servlet</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb(五)</title>
     <url>/2020/04/26/JavaWeb-%E4%BA%94/</url>
     <content><![CDATA[<p>大家好，今天准备分享一下我最近学习的xml的相关知识以及介绍一下tomcat服务器的安装和使用，最后介绍一下HTTP协议。</p>
